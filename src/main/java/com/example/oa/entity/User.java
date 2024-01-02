@@ -1,7 +1,10 @@
 package com.example.oa.entity;
 
+import com.example.oa.dto.DtoConvert;
+import com.example.oa.vo.UserVo;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 
@@ -23,5 +26,19 @@ public class User {
 
     /** 手机号 */
     private String phoneNumber;
+    public UserVo convertToUserVo() {
+        return new User.UserConvert()
+                .convert(this);
+    }
 
+    private static class UserConvert implements DtoConvert<User, UserVo> {
+
+        @Override
+        public UserVo convert(User user) {
+            UserVo userVo = new UserVo();
+            BeanUtils.copyProperties(user, userVo);
+            return userVo;
+        }
+
+    }
 }

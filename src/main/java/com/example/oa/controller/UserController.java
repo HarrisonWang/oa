@@ -1,6 +1,7 @@
 package com.example.oa.controller;
 
-import com.example.oa.dto.*;
+import com.example.oa.dto.NewUser;
+import com.example.oa.dto.UpdatedUser;
 import com.example.oa.entity.User;
 import com.example.oa.service.UserService;
 import com.example.oa.vo.UserVo;
@@ -17,25 +18,21 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserVo> createUser(@RequestBody NewUser newUser) {
-        User user = new NewUserConvert().convert(newUser);
-        User result = userService.createUser(user);
-        UserVo userVo = new UserConvert().convert(result);
+        User user = newUser.convertToUser();
+        UserVo userVo = userService.createUser(user).convertToUserVo();
         return ResponseEntity.ok(userVo);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserVo> updateUser(@PathVariable Long id, @RequestBody UpdatedUser updatedUser) {
-        User user = new UpdatedUserConvert().convert(updatedUser)
-                .setId(id);
-        User result = userService.updateUser(user);
-        UserVo userVo = new UserConvert().convert(result);
+        User user = updatedUser.convertToUser().setId(id);
+        UserVo userVo = userService.updateUser(user).convertToUserVo();
         return ResponseEntity.ok(userVo);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserVo> getUser(@PathVariable Long id) {
-        User result = userService.getUser(id);
-        UserVo userVo = new UserConvert().convert(result);
+        UserVo userVo = userService.getUser(id).convertToUserVo();
         return ResponseEntity.ok(userVo);
     }
 }
