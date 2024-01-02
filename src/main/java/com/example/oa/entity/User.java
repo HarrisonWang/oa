@@ -1,12 +1,14 @@
 package com.example.oa.entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "oa_user")
 @Data
+@Accessors(chain = true)
 public class User {
 
     @Id
