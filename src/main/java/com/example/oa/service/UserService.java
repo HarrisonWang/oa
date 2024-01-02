@@ -24,7 +24,7 @@ public class UserService {
 
         user.setName(updatedUser.getName());
         user.setAge(updatedUser.getAge());
-        user.setPhoneNumber(user.getPhoneNumber());
+        user.setPhoneNumber(updatedUser.getPhoneNumber());
         return userRepository.save(user);
     }
 
