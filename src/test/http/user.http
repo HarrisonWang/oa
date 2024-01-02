@@ -1,0 +1,23 @@
+### 1.更新指定用户信息
+PUT http://localhost:8080/users/4
+Content-Type: application/json
+
+{
+  "name": "小王爷",
+  "age": 28,
+  "phoneNumber": "15122222222"
+}
+
+### 2.新增用户
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "name": "小王爷",
+  "age": 22,
+  "phoneNumber": "15111111111"
+}
+
+### 3.查询指定用户信息
+GET http://localhost:8080/users/4
+Accept: application/json
